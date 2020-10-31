@@ -15,4 +15,5 @@ class UsedcarItem(scrapy.Item):
     zipcode = scrapy.Field()
     price = scrapy.Field()
     mileage = scrapy.Field()
+    description = scrapy.Field()
     pass

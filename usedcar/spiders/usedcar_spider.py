@@ -74,6 +74,11 @@ class UsedCarSpider(scrapy.Spider):
             #parse model
             model = response.url.split("selectedEntity=")[1]
 
+
+            #parse description
+            description = response.url.split("selectedEntity=")[1]
+
+
             usedcar = UsedcarItem()
             usedcar['text'] = heading.css('span::text')[0].get()
             usedcar['year'] = year
@@ -81,5 +86,6 @@ class UsedCarSpider(scrapy.Spider):
             usedcar['zipcode'] = zip_code
             usedcar['price'] = price
             usedcar['mileage'] = mileage
+            usedcar['description'] = response.selector.xpath('/html/body/main/div[2]/div[1]/div[3]/div[2]/div[2]/section[5]/div/div/p[2]/text()').get()
             
             yield usedcar
