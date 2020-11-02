@@ -76,7 +76,7 @@ class UsedCarSpider(scrapy.Spider):
 
 
             #parse description
-            description = response.url.split("selectedEntity=")[1]
+            description = response.selector.xpath('//*[@id="cargurus-listing-search"]/div[1]/div/script/text()').get()
 
 
             usedcar = UsedcarItem()
@@ -86,6 +86,6 @@ class UsedCarSpider(scrapy.Spider):
             usedcar['zipcode'] = zip_code
             usedcar['price'] = price
             usedcar['mileage'] = mileage
-            usedcar['description'] = response.selector.xpath('/html/body/main/div[2]/div[1]/div[3]/div[2]/div[2]/section[5]/div/div/p[2]/text()').get()
+            usedcar['description'] = description
             
             yield usedcar
